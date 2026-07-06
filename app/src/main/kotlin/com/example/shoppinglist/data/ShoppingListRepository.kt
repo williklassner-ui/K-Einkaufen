@@ -22,20 +22,5 @@ class ShoppingListRepository {
         return doc.id
     }
 
-    fun getUserLists(): Flow<List<ShoppingList>> = flow {
-        val userId = auth.currentUser?.uid ?: return@flow
-        listsCollection.whereArrayContains("sharedWith", userId)
-            .addSnapshotListener { snapshot, _ ->
-                // For simplicity, emit in flow
-            }
-        // Note: In production use snapshot listener properly with callbackFlow
-    }
-
-    // Simplified for demo; use proper realtime
-    suspend fun addItem(listId: String, item: ShoppingItem) {
-        val listRef = listsCollection.document(listId)
-        listRef.update("items", com.google.firebase.firestore.FieldValue.arrayUnion(item)).await()
-    }
-
-    // More methods needed for full CRUD, share, etc.
+    // Simplified - expand as needed
 }

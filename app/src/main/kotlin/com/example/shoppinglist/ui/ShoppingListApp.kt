@@ -23,7 +23,6 @@ fun ShoppingListApp() {
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(Unit) {
-        // Sign in anonymously for demo
         if (currentUser == null) {
             auth.signInAnonymously().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -41,17 +40,6 @@ fun ShoppingListApp() {
                     containerColor = MaterialTheme.colorScheme.primary
                 )
             )
-        },
-        floatingActionButton = {
-            if (currentList != null) {
-                FloatingActionButton(onClick = { /* add item dialog */ }) {
-                    Text("+")
-                }
-            } else {
-                FloatingActionButton(onClick = { /* create new list */ }) {
-                    Text("Neue Liste")
-                }
-            }
         }
     ) { padding ->
         Column(
@@ -59,44 +47,8 @@ fun ShoppingListApp() {
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            if (currentList == null) {
-                // List of lists
-                Button(onClick = {
-                    // Create new list demo
-                    scope.launch {
-                        // repository call
-                    }
-                }) {
-                    Text("Neue Einkaufsliste erstellen")
-                }
-            } else {
-                // Items list
-                LazyColumn {
-                    items(currentList!!.items) { item ->
-                        ShoppingItemRow(item)
-                    }
-                }
-            }
+            Text("Willkommen! Firebase Sync bereit.")
+            // Expand UI here
         }
-    }
-}
-
-@Composable
-fun ShoppingItemRow(item: ShoppingItem) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Checkbox(
-            checked = item.checked,
-            onCheckedChange = { /* toggle */ }
-        )
-        Text(
-            text = "${item.name} (${item.quantity})",
-            modifier = Modifier.weight(1f),
-            textDecoration = if (item.checked) TextDecoration.LineThrough else TextDecoration.None
-        )
     }
 }

@@ -12,19 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = androidx.compose.ui.graphics.Color(0xFFD4AF37), // Gold for elegant feel
-    secondary = androidx.compose.ui.graphics.Color(0xFF8A8D8F),
+    primary = androidx.compose.ui.graphics.Color(0xFFD4AF37),
     background = androidx.compose.ui.graphics.Color(0xFF121212),
     surface = androidx.compose.ui.graphics.Color(0xFF1E1E1E),
     onPrimary = androidx.compose.ui.graphics.Color.Black,
-    onSecondary = androidx.compose.ui.graphics.Color.White,
     onBackground = androidx.compose.ui.graphics.Color.White,
     onSurface = androidx.compose.ui.graphics.Color.White,
 )
 
 @Composable
 fun ShoppingListTheme(
-    darkTheme: Boolean = true, // Default dark mode
+    darkTheme: Boolean = true,
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
@@ -34,7 +32,7 @@ fun ShoppingListTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
         darkTheme -> DarkColorScheme
-        else -> lightColorScheme() // Fallback
+        else -> lightColorScheme()
     }
 
     MaterialTheme(
